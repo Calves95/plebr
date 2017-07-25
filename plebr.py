@@ -21,44 +21,26 @@ client.run(config["bot_token"])
 async def on_ready():
     print("Scanning For LoL Plebs")
 
+@client.command(pass_context=True)
+async def region(ctx, region: str):
+    user = mDb.get_user(ctx.author.id)
+    user.region = region
+    mDb.update_user(user)
+    await client.say("Region {} set".format(region))
 
-@client.event
-async def on_message(message):
-    # we do not want the bot to reply to itself
-    if message.author == client.user:
-        return
+@client.command(pass_context=True)
+async def summoner(ctx, summoner: str):
+    user = mDb.get_user(ctx.author.id)
+    user.summoner =summoner
+    mDb.update_user(user)
+    await client.say("Summoner name {} set".format(summoner))
 
-    if not message.content.startswith(bot_prefix):
-        return
-
-    msg = message.content.replace(bot_prefix, "").split(" ")
-    print(msg)
-    # user = db.get_user(message.author)
-    if msg[0] == "region":
-        # set_region(user, region)
-        pass
-    elif msg[0] == "summonername":
-        # set_name(user, summoner)
-        pass
-
-
-def set_region(user, region: str):
-    # user.region = msg[0]
-    # db.set_user(user)
-    pass
-
-
-def set_name(user, summoner: str):
-    # user.summoner = msg[0]
-    # db.set_user(user)
-    pass
-
-
+# !p match
 @client.command(pass_context=True)
 async def match(ctx):
     get_match(mDb.get_user(ctx.author.id))
 
-
+# !p match <summomer>
 @client.command(pass_context=True)
 async def match(ctx, summoner: str):
     user = mDb.get_user(ctx.author.id)
@@ -69,10 +51,10 @@ async def match(ctx, summoner: str):
     user.summoner = summoner
     get_match(user)
 
-
+# !p match <region> <summomer>
 @client.command(pass_context=True)
 async def match(ctx, region: str, summoner: str):
-    get_match(User(summoner, "", region))
+    get_match(User(summoner, " ", region))
 
 
 async def get_match(user: User):
@@ -125,7 +107,7 @@ async def get_match(user: User):
         elif rate >= 50:
             winner = "Average"
         elif rate >= 45:
-            winner = "Below Average"
+            winner = "B1elow Average"
         else:
             winner = "GLHF o.o"
 
