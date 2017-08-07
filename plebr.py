@@ -9,7 +9,7 @@ from user import User
 config = utils.read_json("config.json")
 mDb = db.Memory()
 
-api = RiotAPI(config["riot_api_key"])
+api = RiotAPI(config["riot_api_key"], config["file_location"])
 
 glob = ""
 glob2 = ""
