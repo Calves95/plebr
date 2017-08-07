@@ -6,8 +6,9 @@ import json
 class RiotAPI:
 
 
-    def __init__(self, api_key):
+    def __init__(self, api_key, file_location):
         self.api_key = api_key
+        self.file_location = file_location
 
     def get_summoner_data(self, region, summonerName):
         URL = "https://" + region + "1.api.riotgames.com/lol/summoner/v3/summoners/by-name/" + summonerName + "?api_key=" + self.api_key
@@ -69,7 +70,7 @@ class RiotAPI:
         return response.json()
 
     def get_champion_by_id(self, CID):
-        f = open(File_path, "r")
+        f = open(self.file_location, "r")
         s = f.read()
         champs = json.loads(s)
 
