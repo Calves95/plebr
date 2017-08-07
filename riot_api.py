@@ -69,7 +69,7 @@ class RiotAPI:
         return response.json()
 
     def get_champion_by_id(self, CID):
-        f = open(File_patch, "r")
+        f = open(File_path, "r")
         s = f.read()
         champs = json.loads(s)
 
