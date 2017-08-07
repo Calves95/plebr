@@ -77,3 +77,4 @@ class RiotAPI:
         for key, value in champs['data'].items():
             if champs['data'][key]['id'] == CID:
                 return champs['data'][key]['name']
+
