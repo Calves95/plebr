@@ -57,20 +57,23 @@ async def info(ctx):
 # !p register <Region> <SummonerName>
 @client.command(pass_context=True)
 async def register(ctx, region: str, summoner: str):
+    d_name = str(ctx.message.author)
+    name = str(d_name[:-5])
+    
     try:
         did = ctx.message.author.id
         d_user = mDb.get_user(did)
         if not d_user:  # user not found
             summ = api.get_summoner_data(region, summoner)
             sid = str(summ['id'])
-            await client.say(":inbox_tray: **| Set {}'s Summoner name/region!**".format(ctx.message.author.nick))
+            await client.say(":inbox_tray: **| Set {}'s Summoner name/region!**".format(name))
             d_user = User(summoner, did, region, sid)
             mDb.upsert_user(d_user)
 
         else:
             summ = api.get_summoner_data(region, summoner)
             sid = str(summ['id'])
-            await client.say(":inbox_tray: **| Set {}'s summoner name/region!**".format(ctx.message.author.nick))
+            await client.say(":inbox_tray: **| Set {}'s summoner name/region!**".format(name))
             d_user.summoner = summoner
             d_user.region = region
             d_user.sid = sid
@@ -86,9 +89,12 @@ async def register(ctx, region: str, summoner: str):
 # !p remove [removes summoner/region from discord DB]
 @client.command(pass_context=True)
 async def remove(ctx):
+    d_name = str(ctx.message.author)
+    name = str(d_name[:-5])
+    
     did = ctx.message.author.id
     mDb.remove_user(did)
-    await client.say(":outbox_tray:** | Summoner name and region has been cleared**")
+    await client.say(":outbox_tray:** | Summoner name and region for {} has been cleared**".format(name))
 
 
 # !p account [Checks for saved username/region]
