@@ -292,9 +292,9 @@ def find_match(region: str, summoner: str):
         elif game_mode == "440":
             mode = ":crossed_swords: | *__Summoner's Rift: Flex Ranked__*"
         elif game_mode == "8":
-            mode = ":crossed_swords: | *__Twisted Treeline: Normal*"
+            mode = ":crossed_swords: | *__Twisted Treeline: Normal__*"
         elif game_mode == "8":
-            mode = ":crossed_swords: | *__Twisted Treeline: Ranked*"
+            mode = ":crossed_swords: | *__Twisted Treeline: Ranked__*"
         else:
             mode = ""
 
@@ -343,7 +343,7 @@ def find_match(region: str, summoner: str):
             elif rate >= 45:
                 winner = "Below Average"
             else:
-                winner = "GLHF"
+                winner = "GLHF :/"
 
             buffer.append(get_summoner_line(name, champ, tier, division, LP, rateStr, winner))
 
