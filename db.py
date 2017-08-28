@@ -1,6 +1,9 @@
 from user import User
 import pymongo
 
+
+#Make sure you have Mongodb and the DB itself
+#Is named appropriately
 client = pymongo.MongoClient()
 db = client.plebr
 
