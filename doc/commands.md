@@ -13,7 +13,7 @@ Commands
 
 `!p account [check what your username/region is saved as for quick commands]`
 
-`p remove [clears your current summoner name and region for quick commands]`
+`!p remove [clears your current summoner name and region for quick commands]`
 
 `!p stats [used after !p register account has been set, for solo ranked stats]`
 
